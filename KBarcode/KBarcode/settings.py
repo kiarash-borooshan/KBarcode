@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -55,7 +55,7 @@ ROOT_URLCONF = 'KBarcode.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR, "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,8 +121,44 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR, "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+""" media config """
+# Base url to serve media files
+MEDIA_URL = '/media/'
+
+# Path where media is stored
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
+
+
+""" email config """
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_HOST = 'localhost'
+
+
+""" PHONE number config """
+# PHONENUMBER_DEFAULT_REGION = "IR"
+PHONE_NUMBER_REGION = "IR"
+
+# auth config
+# LOGIN_URL = "account:login"
+
+# "DEFAULT_CENTER": (.23, 36),
+""" leaflet config """
+LEAFLET_CONFIG = {
+    "DEFAULT_CENTER": (32, 53),
+    "DEFAULT_ZOOM": 5,
+    "MAX_ZOOM": 30,
+    "min_zoom": 3,
+    "SCALE": 'both',
+    "ATTRIBUTION_PREFIX": 'inspired by life in GIS'
+}
