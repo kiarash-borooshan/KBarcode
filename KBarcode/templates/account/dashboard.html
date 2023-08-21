@@ -1,0 +1,48 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="{{message.extra_tags}}"> {{message}}</div>
+        {% endfor %}
+    {% endif %}
+
+    <h1 class="title is-1">My Dashboard</h1>
+
+    <div class="columns">
+<!--        -->
+        <div class="column is-4">
+            {% include 'Store/dashboard_setting.html' %}
+<!--            {% include 'partial/partial/theme_box.html' %}-->
+
+        </div>
+
+<!--        available posts -->
+        <div class="column">
+            {% if av_post %}
+                <h2 class="title is-2">موجود در انبار</h2>
+                <div class="mypost">
+                    {% for ap in av_post %}
+                        {% include 'partial/ds_card.html' %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <br>
+
+<!--            unavailable posts -->
+            {% if un_av_post %}
+            <h2 class="title is-2 ">اتمام موجودی در انبار</h2>
+            <div class="mypost">
+                {% for ap in un_av_post %}
+                    {% include 'partial/ds_card.html' %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+
+{% endblock content %}

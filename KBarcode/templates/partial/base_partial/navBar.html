@@ -1,0 +1,52 @@
+{% load static %}
+{% load leaflet_tags %}
+
+<nav class="navbar {{request.user.profile.theme}}" role="navigation">
+    <div class="navbar-brand">
+        <p class="navbar-item title is-3"><span class="icon"><i class="fa-solid fa-hashtag"></i></span></p>
+    </div>
+    <div class="navbar-menu">
+        <div class="navbar-start">
+
+            <a href="{% url 'StoreApp:index' %}" class="navbar-item p-2">Home</a>
+            <a href="#" class="navbar-item p-2">Categories</a>
+        </div>
+        <div class="navbar-end">
+
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'account:logout' %}" class="navbar-item">Log out</a>
+                <a href="{% url 'account:dashboard' %}" class="navbar-item dashboard">
+                    {{ request.user.first_name | capfirst }}
+                    {{ request.user.last_name | capfirst }}
+                    {{ request.user.username | capfirst }}
+                    {{ request.user.email | capfirst }}
+
+<!--                    doesn't show the pic ?-->
+                    {% if request.user.profile.photo %}
+                        <div>
+                            <img src="{{ request.user.profile.photo.url }}" alt="#" class="avatar" />
+                        </div>
+                    {% else %}
+                        <div>
+                            <img src="{% static 'no image.png' %}" alt="#" class="avatar" />
+                        </div>
+                    {% endif %}
+                    <span class="icon"><i class="fa-solid fa-user"></i></span>
+                </a>
+
+                <span class="navbar-item has-text-muted">|</span>
+
+<!--                <a href="{% url 'StoreApp:new_post' %}" class="navbar-item is-danger">-->
+<!--                    <span>Write a new post</span>-->
+<!--                </a>-->
+
+            {% else %}
+                <a href="{% url 'account:login' %}" class="navbar-item">Log in to Retail warehousing </a>
+                <a href="{% url 'account:login_em' %}" class="navbar-item">Log in to AiEarthMonitor </a>
+                <a href="{% url 'account:register' %}" class="navbar-item">Sign up to Retail warehousing</a>
+                <a href="{% url 'account:register_em' %}" class="navbar-item">Sign up to AiEarthMonitor</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+

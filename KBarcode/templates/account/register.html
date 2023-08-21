@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="display-1"> Sign up KBarcode </h1>
+
+  <form class="my-5" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+<!--    form-->
+    {% for field in form %}
+      <label for="{{field.id_for_label}}" class="label">{{field.label}}</label>
+      <div class="control">{{field}}</div>
+      <small class="is-danger" style="color:chartreuse"> {{field.help_text}} </small>
+      <small class="is-danger" style="color:crimson"> {{field.errors}} </small>
+      <br>
+    {% endfor %}
+
+<!--    profile form -->
+    {% for pform in profile_form %}
+      <label for="{{pform.id_for_label}}" class="label">{{pform.label}}</label>
+      <div class="control"> {{pform}}</div>
+      <small class="is-danger" style="color: crimson"> {{pform.errors}} </small>
+      <br>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-success mt-4" > Join to KBarcode </button>
+  </form>
+
+{% endblock content %}

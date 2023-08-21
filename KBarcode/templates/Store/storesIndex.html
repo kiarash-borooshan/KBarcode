@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+<html lang="en">
+
+<!-- head -->
+
+<body>
+<!--    navBar -->
+
+{% block container %}
+
+<!-- container -->
+
+        <div class="columns">
+
+            <div class="column is-8 {{request.user.profile.theme}}">
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="{{message.extra_tags}}"> {{message}}</div>
+                    {% endfor %}
+                {% endif %}
+
+<!--                card -->
+                {% for store in stores %}
+                    {% include 'partial/card.html' %}
+                {% endfor %}
+
+                <!-- pagination -->
+                {% include 'partial/pagination.html' %}
+
+            </div>
+
+            <div class="column">
+<!--                categories panel -->
+                {% include 'partial/categories.html' %}
+
+<!--                gender type panel -->
+                {% include 'partial/gender_type.html' %}
+
+<!--                age panel -->
+                {% include 'partial/age.html' %}
+
+<!--                tags-->
+                {% include 'partial/tags.html' %}
+
+            </div>
+        </div>
+
+
+    <!-- footer -->
+
+</body>
+{% endblock container %}
+
+</html>

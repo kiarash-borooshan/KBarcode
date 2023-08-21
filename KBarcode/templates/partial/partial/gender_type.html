@@ -1,0 +1,11 @@
+
+<div class="panel {{request.user.profile.theme}}">
+
+    <p class="panel-heading ">جنسیت </p>
+    {% for g in gender_types %}
+        <a href="#" class="panel-block">
+            <p>{{ g.name | capfirst }}</p>
+        </a>
+    {% endfor %}
+
+</div>

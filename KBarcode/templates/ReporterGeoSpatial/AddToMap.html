@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load leaflet_tags %}
+
+<head>
+    {% leaflet_js %}
+    {% leaflet_css %}
+    <meta charset="UTF-8">
+    <title>our home</title>
+
+<!--    <style type="text/css">-->
+<!--        #gis {width: 80%; height:70% }-->
+<!--    </style>-->
+
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'GeoSpatial/leafletGrpLyrCntrl/leaflet.groupedlayercontrol.css' %}">
+
+    <script type="text/javascript"
+            src="{% static 'GeoSpatial/dist/leaflet.ajax.js' %}">
+    </script>
+
+    <script type="text/javascript"
+            src="{% static 'GeoSpatial/leafletGrpLyrCntrl/leaflet.groupedlayercontrol.js' %}">
+    </script>
+
+</head>
+
+<body>
+
+<!-- message -->
+{% if messages %}
+    {% for message in messages %}
+        <div class="{{message.extra_tags}}"> {{message}}</div>
+    {% endfor %}
+{% endif %}
+
+<!-- dashboard -->
+<h1 class="title is-1">Ai Earth Monitor Dashboard</h1>
+
+<hr>
+
+<!-- map -->
+<script type="text/javascript">
+    function our_layer(map, option){
+
+<!--        var osm = 'http://{s}.tile.openstreetmap.org/{z}/{y}/{x}.png';-->
+
+        var dataset = new L.GeoJSON.AJAX("{% url 'rporterGeoSpatial:country'%}",{
+
+            style: function colors(feature){
+                switch(feature.properties.name_1){
+                    case "Semnan":
+                        return{
+                            color: "orange",
+                            fillOpacity:0.2
+                        };
+                    break;
+                    case "Kordestan":
+                        return{
+                            color: "purple"
+                        };
+                    break;
+                }
+            },
+
+            onEachFeature: function(feature, layer){
+                layer.bindPopup(feature.properties.name_1.toString());
+            }
+        });
+
+        var point = new L.GeoJSON.AJAX("{% url 'rporterGeoSpatial:incident'%}",{
+            onEachFeature: function(feature, layer){
+                layer.bindPopup(feature.properties.name.toString());
+            }
+        });
+
+        dataset.addTo(map);
+        point.addTo(map);
+
+<!--        var baseLayers = {-->
+<!--        "OSM": osm-->
+<!--        }-->
+
+        var groupedOverlays = {
+          "Layers": {
+            "counties": dataset,
+            "incidences": point
+          }
+        };
+
+<!--        L.control.groupedLayers(baseLayers, groupedOverlays).addTo(map);-->
+        L.control.groupedLayers(groupedOverlays).addTo(map);
+    }
+</script>
+
+{% leaflet_map "gis" callback="window.our_layer" %}
+
+</body>
+
+</html>

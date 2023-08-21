@@ -1,0 +1,27 @@
+
+<nav class="pagination is-rounded" role="navigation" aria-label="pagination">
+    {% if stores.has_previous %}
+        <a class="pagination-previous"
+           href="/stores/donyaye koodakan/?page={{ stores.previous_page_number }}">
+            صفحه قبلی</a>
+    {% endif %}
+
+    {% if stores.has_next %}
+        <a class="pagination-next"
+           href="/stores/donyaye koodakan/?page={{stores.next_page_number}}">
+            صفحه بعدی</a>
+    {% endif %}
+
+
+    <ul class="pagination-list">
+        {% for page in stores.paginator.page_range %}
+            <li>
+                <a href="/stores/donyaye koodakan/?page={{page}}"
+                   class="pagination-link
+                   {% if stores.number == page %}
+                    is-current {% endif %}"
+                   aria-label="Goto page 1">{{page}}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</nav>

@@ -1,0 +1,8 @@
+
+<div class="panel {{request.user.profile.theme}}">
+    <p class="panel-heading">Dashboard Settings</p>
+    <a href="{% url 'StoreApp:new_post' %}" class="panel-block">Write a new post</a>
+    <a href="{% url 'account:edit_info' %}" class="panel-block">Edit my info</a>
+    <a href="{% url 'account:change_password' %}" class="panel-block">Change password</a>
+    <a href="{% url 'account:delete_account' %}" class="panel-block">Delete Account</a>
+</div>

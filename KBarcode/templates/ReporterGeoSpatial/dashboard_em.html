@@ -1,0 +1,33 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="{{message.extra_tags}}"> {{message}}</div>
+        {% endfor %}
+    {% endif %}
+
+    <h1 class="title is-1">My Ai Earth Monitor Dashboard</h1>
+
+    <div class="columns">
+<!--        -->
+        <div class="column is-4">
+            {% include 'ReporterGeoSpatial/dashboard_em_setting.html' %}
+            <hr>
+
+<!--            {% include 'partial/partial/theme_box.html' %}-->
+
+        </div>
+
+        <div class="column is-4">
+            {% include 'ReporterGeoSpatial/AddToMap.html' %}
+            <hr>
+
+        </div>
+
+
+    </div>
+
+{% endblock content %}

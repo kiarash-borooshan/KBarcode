@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'partial/base_partial/head.html' %}
+
+<body>
+
+    <!-- navBar -->
+    {% include 'partial/base_partial/navBar.html' %}
+
+    <!-- authentication-->
+    <div class="content m-5">
+        {% block content%}
+        {% endblock %}
+    </div>
+
+    <!-- map AiEarthMonitor -->
+    {% block map %}
+    {% endblock %}
+
+
+
+    <!-- Store index-->
+
+    <div class="container">
+        {% block container%}
+        {% endblock %}
+    </div>
+
+
+    <!-- store detail -->
+    <div class="column is-6 head">
+        {% block detail %}
+        {% endblock %}
+    </div>
+
+    <!-- footer -->
+    {% include 'partial/base_partial/footer.html' %}
+
+</body>
+
+</html>

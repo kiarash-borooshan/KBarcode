@@ -1,0 +1,11 @@
+
+<div class="panel {{request.user.profile.theme}}">
+
+    <p class="panel-heading ">سن</p>
+    {% for a in ages %}
+        <a href="#" class="panel-block">
+            <p>{{ a.age | capfirst }}</p>
+        </a>
+    {% endfor %}
+
+</div>

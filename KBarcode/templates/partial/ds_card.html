@@ -1,0 +1,21 @@
+{% load static %}
+<div class="ccard card" >
+
+    {% if ap.banner %}
+        <div class="cc-img"><img src="{{ ap.banner.url }}" alt="{{ ap.title }}"></div>
+    {% else %}
+        <div class="cc-img"><img src="{% static 'no image.png' %}" alt=""></div>
+    {% endif %}
+
+    <div class="card-content">
+        <h4 class="title is-4">
+            {{ap.name | title }}
+        </h4>
+        <div class="field has-addons">
+            <a href="#" class="button is-light  is-danger is-small">Delete</a>
+            <a href="@" class="button is-light is-success is-small">Edit</a>
+            <a href="@" class="button is-light is-warning is-small">see more</a>
+            <p class="button is-small is-light is-light">Likes</p>
+        </div>
+    </div>
+</div>

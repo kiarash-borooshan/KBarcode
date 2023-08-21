@@ -1,0 +1,47 @@
+
+{% extends 'base.html' %}
+
+{% block container %}
+    <h1 class="title is-1">Share: {{ store_share.name | title }}</h1>
+
+    <form method="POST" action="{% url 'ToysApp:toy_send_post' store_share.category.name store_share.slug%}">
+        {% csrf_token %}
+<!--        from-->
+            <div class="block">
+                <label for="from" class="label">From</label>
+                <div class="control">
+                    <input type="email"
+                           name="from" id="from"
+                           class="input"
+                    required>
+                </div>
+            </div>
+
+<!--        to-->
+            <div class="block">
+                <label for="to" class="label">To</label>
+                <div class="control">
+                    <input type="email"
+                           name="to"
+                           id="to"
+                           class="input"
+                    required>
+                </div>
+            </div>
+
+<!--        caption -->
+            <div class="block">
+                <label for="caption" class="label">Caption</label>
+                <div class="control">
+                    <textarea name="caption"
+                              id="caption"
+                              class="input">
+                    </textarea>
+                </div>
+            </div>
+
+<!--        submit -->
+            <div class="block"><input type="submit" value="Send mail" class="button is-medium {{request.user.profile.theme}}"></div>
+        </form>
+
+{% endblock %}

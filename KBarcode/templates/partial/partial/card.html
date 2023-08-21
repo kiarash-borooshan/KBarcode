@@ -1,0 +1,39 @@
+{% load static %}
+
+<div class="card card-display">
+
+    <div class="card-image image imagesize">
+        {% if store.banner %}
+            <img src="{{ store.banner.url }}" alt="Image" style="height: 16rem;">
+        {% else %}
+            <img src="{% static 'no image.png' %}" alt="Image" style="height: 16rem;">
+        {% endif %}
+    </div>
+
+    <div class="card-top">
+        <div class="card-content">
+            <h3 class="title is-3"> {{ store.name | title }}</h3>
+            <div class="subtitle is-6 {{request.user.profile.theme}}">
+                <span class="icon"><i class="fa-solid fa-user"></i></span>
+                <span>
+                    {{ store.user.first_name | capfirst }}
+                    {{ store.user.last_name | capfirst }}
+                </span>
+                <span> | </span>
+                <span>{{ store.date | timesince }} ago</span>
+            </div>
+            <div class="text content">
+                <p>{{ store.body | truncatewords:10}}</p>
+            </div>
+            <div class="text content">
+                <p> : ... لینک یوتیوب، آپارات، دیدئو و   </p>
+                <p>{{ store.video_link }} </p>
+            </div>
+            <div>
+<!--                {{ store.get_absolute_url }}-->
+                <a href="{% url 'storesApp:store_detail' store.category.name store.slug %}"
+                   class="button {{request.user.profile.theme}} card-item see-more">see more</a>
+            </div>
+        </div>
+    </div>
+</div>

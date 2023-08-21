@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% if store.banner %}
+    <div class="image block"><img src="{{ store.banner.url }}" alt="#"></div>
+{% else %}
+    <div class="image block"><img src="{% static 'no image.png' %}" alt="#"></div>
+{% endif %}
+
+<h1 class="title is-1 block">{{ store.name | title }}</h1>
+
+<div class="block"><small>دسته‌بندی: {{store.category | capfirst}}</small></div>
+<p class="block">{{ store.body | linebreaksbr }}</p>
+
+<!-- tags -->
+<!--<div class="block">Tags : <small>tags 1, tag 2, ...</small></div>-->
+{% for object in store %}
+    <ul>
+        {% for tag in object.tags.all %}
+            <li> #{{ tag.name }}, </li>
+        {% endfor %}
+    </ul>
+{% endfor %}
+
+<hr>
+<div>
+    <div class="block ah">
+        <div class="author">
+            <img src="./static/img.jpg" class="author-img" alt="">
+            <div style="font-size:35px; margin-right:30px"><span class="icon"><i
+                        class="fa-solid fa-user"></i></span> </div>
+            <h4 class="title is-4"><a href="#">
+                {{ store.user.first_name | capfirst }}
+                {{ store.user.last_name | capfirst }}
+            </a></h4>
+        </div>
+        <div class="block like">
+            <form class="like-btn" method="post" data-url="url" id="likeForm">
+                <input type="hidden" name="post_id" value="post_id" />
+                <button type="submit" class="button"><span id="likeBtn" ><i class="fa-solid fa-heart"></i></span></button>
+                <p id="likes">31</p>
+            </form>
+            <div>
+                <a href="{% url 'storesApp:store_share_post' store.category.name store.slug %} "
+                        class="button">
+                    <span class="icon">
+                        <i class="fa-solid fa-share"></i>
+                    </span>
+                </a>
+            </div>
+            <div>
+                <button type="button" class="button"><span class="icon"><i class="fa-solid fa-copy"></i></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+
+<h3 class="title is-3">Comments</h3>
+<form class="field">
+    <div class="control block">
+        <input type="text" class="textarea is-small ta">
+    </div>
+    <div class="control block">
+        <input type="submit" class="button {{request.user.profile.theme}}" value="send">
+    </div>
+</form>
+<div class="comments">
+    <h4> comment </h4>
+<!--<ul>-->
+<!--    <li class="comment">-->
+<!--        <div class="author">-->
+<!--            <img src="./static/img.jpg" class="author-img" alt="">-->
+<!--&lt;!&ndash;            <h4 class="title is-4">Nima Parandavar</h4>&ndash;&gt;-->
+<!--        </div>-->
+<!--        <hr>-->
+<!--        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam, asperiores.</p>-->
+<!--    </li>-->
+<!--    <li class="comment">-->
+<!--        <div class="author">-->
+<!--            <img src="./static/img.jpg" class="author-img" alt="">-->
+<!--&lt;!&ndash;            <h4 class="title is-4">Nima Parandavar</h4>&ndash;&gt;-->
+<!--        </div>-->
+<!--        <hr>-->
+<!--        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam, asperiores.</p>-->
+<!--    </li>-->
+<!--</ul>-->
+</div>
