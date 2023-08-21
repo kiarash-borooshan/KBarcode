@@ -38,6 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "Account",
+    "ReporterGeoSpatial",
+    "Store",
+    'django.contrib.gis',
+    "phonenumber_field",
+    "phonenumbers",
+    "django_phonenumbers",
+    "taggit",
+    "leaflet",
 ]
 
 MIDDLEWARE = [
